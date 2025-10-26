@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop_Kataev.Data.Interfaces;
+using Shop_Kataev.Data.Models;
 using Shop_Kataev.Data.ViewModell;
 
 namespace Shop_Kataev.Controllers
@@ -10,12 +11,12 @@ namespace Shop_Kataev.Controllers
         private ICategories IAllCategorys;
         VMItems VMItems = new VMItems();
 
-        public ItemsController(IItems IAllItems, ICategories IAllCategorys) {        
+        public ItemsController(IItems IAllItems, ICategories IAllCategorys) {
             this.IAllItems = IAllItems;
             this.IAllCategorys = IAllCategorys;
         }
 
-        public ViewResult List(int id = 0) 
+        public ViewResult List(int id = 0)
         {
             ViewBag.Title = "Страница с предметами";
             // получаем предметы
@@ -26,6 +27,15 @@ namespace Shop_Kataev.Controllers
             VMItems.SelectCategory = id;
             return View(VMItems);
         }
- 
-    }
+
+        // метод добавления предмета
+        [HttpGet]
+        public ViewResult Add() 
+        {
+            IEnumerable<Categories> Categorys = IAllCategorys.AllCategorys;
+
+            return View(Categorys);
+        }
+
+    } 
 }
