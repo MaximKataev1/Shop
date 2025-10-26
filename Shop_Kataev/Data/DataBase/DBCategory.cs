@@ -7,7 +7,7 @@ namespace Shop_Kataev.Data.DataBase
 {
     public class DBCategory : ICategories
     {
-        public IEnumerable<Categories> AllCategories 
+        public IEnumerable<Categories> AllCategorys 
         {
             get 
             {
