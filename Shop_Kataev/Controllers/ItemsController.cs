@@ -32,7 +32,7 @@ namespace Shop_Kataev.Controllers
 
         // Метод для отображения страницы добавления нового предмета
         [HttpGet]
-        public ViewResult Add() 
+        public ViewResult Add()
         {
             // Получаем список всех категорий для выбора при добавлении предмета
             IEnumerable<Categories> Categorys = IAllCategorys.AllCategorys;
@@ -42,10 +42,10 @@ namespace Shop_Kataev.Controllers
 
         // Метод обработки формы добавления нового предмета
         [HttpPost]
-        public RedirectResult Add(string name, string description, IFormFile files, float price, int idCategory) 
+        public RedirectResult Add(string name, string description, IFormFile files, float price, int idCategory)
         {
             // Проверяем, был ли загружен файл изображения
-            if (files != null) 
+            if (files != null)
             {
                 // Определяем путь до папки img в корне веб-приложения
                 var uploads = Path.Combine(hostingEnvironment.WebRootPath, "img");
@@ -128,11 +128,23 @@ namespace Shop_Kataev.Controllers
         }
 
         // Функция добавления предметов в корзину
-        public ActionResult Basket(int idItem = -1) 
+        public ActionResult Basket(int idItem = -1)
+        {
+            if (idItem != -1)
+            {
+                BaskUser.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
+            }
+            return Json(BaskUser.BasketItem);
+        }
+
+        public ActionResult BasketCount(int idItem = -1, int count = -1) 
         {
             if (idItem != -1) 
             {
-                BaskUser.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
+                if (count == 0)
+                    BaskUser.BasketItem.Remove(BaskUser.BasketItem.Find(x => x.Id == idItem));
+                else
+                    BaskUser.BasketItem.Find(x => x.Id == idItem).Count = count;
             }
             return Json(BaskUser.BasketItem);
         }
