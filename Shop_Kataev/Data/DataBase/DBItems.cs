@@ -13,11 +13,16 @@ namespace Shop_Kataev.Data.DataBase
         {
             get
             {
+                // создаём список предметов
                 List<Items> items = new List<Items>();
+                // открываем подключение к бд
                 MySqlConnection MySqlConnection = Connection.MySqlOpen();
+                // получаем данные из таблицы
                 MySqlDataReader ItemsData = Connection.MySqlQuery("SELECT * FROM Shop.Items ORDER BY `Name`;", MySqlConnection);
+                // читаем данные
                 while (ItemsData.Read())
                 {
+                    // заполняем список предметов
                     items.Add(new Items()
                     {
                         Id = ItemsData.IsDBNull(0) ? -1 : ItemsData.GetInt32(0),
@@ -28,7 +33,9 @@ namespace Shop_Kataev.Data.DataBase
                         Category = ItemsData.IsDBNull(5) ? null : Categorys.Where(x => x.Id == ItemsData.GetInt32(5)).First()
                     });
                 }
+                // закрываем подключение 
                 MySqlConnection.Close();
+                // возвращаем список предметов
                 return items;
             }
         }
