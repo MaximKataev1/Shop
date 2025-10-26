@@ -32,5 +32,10 @@ namespace Shop_Kataev.Data.Mocks
                 };
             }
         }
+
+        public int Add(Items Item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
