@@ -1,5 +1,6 @@
 using Shop_Kataev.Data.DataBase;
 using Shop_Kataev.Data.Interfaces;
+using Shop_Kataev.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<ICategories, DBCategory>();
@@ -12,3 +13,9 @@ app.UseStatusCodePages();
 app.UseStaticFiles();
 app.UseMvcWithDefaultRoute();
 app.Run();
+
+class BaskUser 
+{
+    // Данные о корзине пользователя 
+    public static List<ItemsBasket> BasketItem = new List<ItemsBasket>();
+}

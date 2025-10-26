@@ -126,5 +126,15 @@ namespace Shop_Kataev.Controllers
             // Перенаправляем обратно к списку предметов после удаления
             return RedirectToAction("List");
         }
+
+        // Функция добавления предметов в корзину
+        public ActionResult Basket(int idItem = -1) 
+        {
+            if (idItem != -1) 
+            {
+                BaskUser.BasketItem.Add(new ItemsBasket(1, IAllItems.AllItems.Where(x => x.Id == idItem).First()));
+            }
+            return Json(BaskUser.BasketItem);
+        }
     } 
 }
