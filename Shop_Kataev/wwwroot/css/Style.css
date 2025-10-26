@@ -67,3 +67,17 @@ form {
     form select {
         width: -webkit-fill-available;
     }
+
+.delete {
+    width: 200px;
+    float: right;
+    box-shadow: none;
+}
+
+.button {
+    height: 20px;
+    width: 110px;
+    cursor: pointer;
+    text-align: center;
+    background: #ffc300;
+}

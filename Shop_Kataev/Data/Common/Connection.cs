@@ -4,7 +4,7 @@ namespace Shop_Kataev.Data.Common
 {
     public class Connection
     {
-        readonly static string ConnectionData = "server=127.0.0.1;port=3307;database=Shop;uid=root"; // строка данных для подключения к БД
+        readonly static string ConnectionData = "server=127.0.0.1;port=3306;database=Shop;uid=root"; // строка данных для подключения к БД
 
         // Метод открытия соединения с базой данных
         public static MySqlConnection MySqlOpen() 

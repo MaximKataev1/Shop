@@ -1,0 +1,52 @@
+﻿@using Shop_Kataev.Data.Models
+@using Shop_Kataev.Data.ViewModell
+
+@model Items
+
+@{
+    Layout = "_Layout";
+    var categories = (IEnumerable<Categories>)ViewBag.Categorys;
+}
+
+<h2>Редактирование предмета</h2>
+
+<form asp-action="Update" asp-controller="Items" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <div>
+        <label>Название:</label>
+        <input type="text" name="name" value="@Model.Name" required />
+    </div>
+
+    <div>
+        <label>Описание:</label>
+        <textarea name="description" required>@Model.Description</textarea>
+    </div>
+
+    <div>
+        <label>Изображение:</label><br />
+        <img src="@Model.Img" width="200" /><br />
+        <label>Заменить изображение:</label>
+        <input type="file" name="file" accept="image/*" />
+    </div>
+
+    <div>
+        <label>Цена:</label>
+        <input type="number" name="price" value="@Model.Price" required />
+    </div>
+
+    <div>
+        <label>Категория:</label>
+        <select name="idCategory" required>
+            @foreach (var cat in categories)
+            {
+                <option value="@cat.Id" @(Model.Category?.Id == cat.Id ? "selected" : "")>@cat.Name</option>
+            }
+        </select>
+    </div>
+
+    <div>
+        <button type="submit">Сохранить</button>
+        <a href="/Items/List">Отмена</a>
+    </div>
+</form>
